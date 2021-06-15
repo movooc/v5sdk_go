@@ -198,7 +198,7 @@ func (this *RESTAPI) Run(ctx context.Context) (res *RESTAPIResult, err error) {
 	headStr := this.SetHeaders(req, timestamp, sign)
 	res.Header = headStr
 
-	this.PrintRequest(req, body, preHash)
+	// this.PrintRequest(req, body, preHash)
 	resp, err := client.Do(req)
 	if err != nil {
 		fmt.Println("请求失败！", err)
