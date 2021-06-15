@@ -3,6 +3,14 @@ OKEX go版本的v5sdk，仅供学习交流使用。
 (文档持续完善中)
 # 项目说明
 
+## install 
+
+
+```bash
+go get github.com/du5/v5sdk_go
+```
+
+
 ## REST调用
 ``` go
     // 设置您的APIKey

@@ -5,7 +5,8 @@ package wImpl
 
 import (
 	"encoding/json"
-	. "v5sdk_go/utils"
+
+	. "github.com/du5/v5sdk_go/utils"
 )
 
 // jrpc请求结构体

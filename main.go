@@ -5,8 +5,9 @@ import (
 	"fmt"
 	"log"
 	"time"
-	. "v5sdk_go/rest"
-	. "v5sdk_go/ws"
+
+	. "github.com/du5/v5sdk_go/rest"
+	. "github.com/du5/v5sdk_go/ws"
 )
 
 /*

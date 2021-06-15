@@ -6,11 +6,12 @@ import (
 	"log"
 	"sync"
 	"time"
-	. "v5sdk_go/config"
-	"v5sdk_go/rest"
-	. "v5sdk_go/utils"
-	. "v5sdk_go/ws/wImpl"
-	. "v5sdk_go/ws/wInterface"
+
+	. "github.com/du5/v5sdk_go/config"
+	"github.com/du5/v5sdk_go/rest"
+	. "github.com/du5/v5sdk_go/utils"
+	. "github.com/du5/v5sdk_go/ws/wImpl"
+	. "github.com/du5/v5sdk_go/ws/wInterface"
 )
 
 /*
