@@ -269,8 +269,10 @@ func (this *RESTAPI) GenReqInfo() (uri string, body string, err error) {
 
 		var rawBody []byte
 		if len(this.Param) == 0 {
+			fmt.Println("this.Param22222=====")
 			rawBody, err = json.Marshal(this.Param2)
 		} else {
+			fmt.Println("this.Param=====")
 			rawBody, err = json.Marshal(this.Param)
 		}
 
@@ -278,6 +280,7 @@ func (this *RESTAPI) GenReqInfo() (uri string, body string, err error) {
 			return
 		}
 		body = string(rawBody)
+		fmt.Println("======body======", body)
 	default:
 		err = errors.New("request type unknown!")
 		return
