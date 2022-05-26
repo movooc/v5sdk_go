@@ -1,18 +1,19 @@
 # 简介
-OKEX go版本的v5sdk，仅供学习交流使用。
+
+OKEX go 版本的 v5sdk，仅供学习交流使用。
 (文档持续完善中)
+
 # 项目说明
 
-## install 
-
+## install
 
 ```bash
-go get github.com/du5/v5sdk_go
+go get github.com/movooc/v5sdk_go
 ```
 
+## REST 调用
 
-## REST调用
-``` go
+```go
     // 设置您的APIKey
 	apikey := APIKeyInfo{
 		ApiKey:     "xxxx",
@@ -35,12 +36,14 @@ go get github.com/du5/v5sdk_go
 	fmt.Println("\terrCode: ", rsp.V5Response.Code)
 	fmt.Println("\terrMsg: ", rsp.V5Response.Msg)
 	fmt.Println("\tdata: ", rsp.V5Response.Data)
- ```
-更多示例请查看rest/rest_test.go  
+```
 
-## websocket订阅
+更多示例请查看 rest/rest_test.go
+
+## websocket 订阅
 
 ### 私有频道
+
 ```go
     ep := "wss://ws.okex.com:8443/ws/v5/private?brokerId=9999"
 
@@ -75,7 +78,7 @@ go get github.com/du5/v5sdk_go
 		return
 	}
 
-	
+
 	var args []map[string]string
 	arg := make(map[string]string)
 	arg["ccy"] = "BTC"
@@ -102,9 +105,11 @@ go get github.com/du5/v5sdk_go
 		fmt.Println("取消订阅失败！", err)
 	}
 ```
-更多示例请查看ws/ws_priv_channel_test.go  
+
+更多示例请查看 ws/ws_priv_channel_test.go
 
 ### 公有频道
+
 ```go
     ep := "wss://ws.okex.com:8443/ws/v5/public?brokerId=9999"
 
@@ -115,7 +120,7 @@ go get github.com/du5/v5sdk_go
 		return
 	}
 
-	
+
 	// 设置连接超时
 	r.SetDailTimeout(time.Second * 2)
 	err = r.Start()
@@ -126,7 +131,7 @@ go get github.com/du5/v5sdk_go
 
 	defer r.Stop()
 
-	
+
 	var args []map[string]string
 	arg := make(map[string]string)
 	arg["instType"] = FUTURES
@@ -157,9 +162,11 @@ go get github.com/du5/v5sdk_go
 		fmt.Println("取消订阅失败！", err)
 	}
 ```
-更多示例请查看ws/ws_pub_channel_test.go  
 
-## websocket交易
+更多示例请查看 ws/ws_pub_channel_test.go
+
+## websocket 交易
+
 ```go
     ep := "wss://ws.okex.com:8443/ws/v5/private?brokerId=9999"
 
@@ -216,10 +223,12 @@ go get github.com/du5/v5sdk_go
 	}
 
 ```
-更多示例请查看ws/ws_jrpc_test.go  
 
-## wesocket推送
-websocket推送数据分为两种类型数据:`普通推送数据`和`深度类型数据`。  
+更多示例请查看 ws/ws_jrpc_test.go
+
+## wesocket 推送
+
+websocket 推送数据分为两种类型数据:`普通推送数据`和`深度类型数据`。
 
 ```go
 ws/wImpl/BookData.go
@@ -237,9 +246,12 @@ type DepthData struct {
 	Data   []DepthDetail     `json:"data"`
 }
 ```
+
 如果需要对推送数据做处理用户可以自定义回调函数:
+
 1. 全局消息处理的回调函数  
-该回调函数会处理所有从服务端接受到的数据。
+   该回调函数会处理所有从服务端接受到的数据。
+
 ```go
 /*
 	添加全局消息处理的回调函数
@@ -249,10 +261,12 @@ func (a *WsClient) AddMessageHook(fn ReceivedDataCallback) error {
 	return nil
 }
 ```
-使用方法参见 ws/ws_test.go中测试用例TestAddMessageHook。
+
+使用方法参见 ws/ws_test.go 中测试用例 TestAddMessageHook。
 
 2. 订阅消息处理回调函数  
-可以处理所有非深度类型的数据，包括 订阅/取消订阅，普通推送数据。
+   可以处理所有非深度类型的数据，包括 订阅/取消订阅，普通推送数据。
+
 ```go
 /*
 	添加订阅消息处理的回调函数
@@ -262,11 +276,12 @@ func (a *WsClient) AddBookMsgHook(fn ReceivedMsgDataCallback) error {
 	return nil
 }
 ```
-使用方法参见 ws/ws_test.go中测试用例TestAddBookedDataHook。
 
+使用方法参见 ws/ws_test.go 中测试用例 TestAddBookedDataHook。
 
 3. 深度消息处理的回调函数  
-这里需要说明的是，Wsclient提供了深度数据管理和自动checksum的功能，用户如果需要关闭此功能，只需要调用EnableAutoDepthMgr方法。
+   这里需要说明的是，Wsclient 提供了深度数据管理和自动 checksum 的功能，用户如果需要关闭此功能，只需要调用 EnableAutoDepthMgr 方法。
+
 ```go
 /*
 	添加深度消息处理的回调函数
@@ -276,9 +291,11 @@ func (a *WsClient) AddDepthHook(fn ReceivedDepthDataCallback) error {
 	return nil
 }
 ```
-使用方法参见 ws/ws_pub_channel_test.go中测试用例TestOrderBooks。
 
-4. 错误消息类型回调函数  
+使用方法参见 ws/ws_pub_channel_test.go 中测试用例 TestOrderBooks。
+
+4. 错误消息类型回调函数
+
 ```go
 func (a *WsClient) AddErrMsgHook(fn ReceivedDataCallback) error {
 	a.OnErrorHook = fn
@@ -287,5 +304,6 @@ func (a *WsClient) AddErrMsgHook(fn ReceivedDataCallback) error {
 ```
 
 # 联系方式
+
 邮箱:caron_co@163.com  
 微信:caron_co

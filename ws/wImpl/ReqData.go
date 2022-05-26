@@ -7,7 +7,7 @@ package wImpl
 import (
 	"encoding/json"
 
-	. "github.com/du5/v5sdk_go/utils"
+	. "github.com/movooc/v5sdk_go/utils"
 )
 
 // 客户端请求消息格式

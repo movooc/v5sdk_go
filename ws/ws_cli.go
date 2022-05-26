@@ -11,9 +11,9 @@ import (
 	"sync"
 	"time"
 
-	. "github.com/du5/v5sdk_go/config"
-	. "github.com/du5/v5sdk_go/utils"
-	. "github.com/du5/v5sdk_go/ws/wImpl"
+	. "github.com/movooc/v5sdk_go/config"
+	. "github.com/movooc/v5sdk_go/utils"
+	. "github.com/movooc/v5sdk_go/ws/wImpl"
 
 	"github.com/gorilla/websocket"
 )

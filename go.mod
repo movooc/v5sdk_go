@@ -1,4 +1,4 @@
-module github.com/du5/v5sdk_go
+module github.com/movooc/v5sdk_go
 
 go 1.16
 

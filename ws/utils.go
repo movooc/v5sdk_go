@@ -5,8 +5,8 @@ import (
 	"log"
 	"runtime/debug"
 
-	. "github.com/du5/v5sdk_go/ws/wImpl"
-	. "github.com/du5/v5sdk_go/ws/wInterface"
+	. "github.com/movooc/v5sdk_go/ws/wImpl"
+	. "github.com/movooc/v5sdk_go/ws/wInterface"
 )
 
 // 判断返回结果成功失败
@@ -45,11 +45,11 @@ func checkResult(wsReq WSReqData, wsRsps []*Msg) (res bool, err error) {
 			return
 		}
 
-		for idx, _ := range req.Args {
+		for idx := range req.Args {
 			ok := false
 			i_req := req.Args[idx]
 			//fmt.Println("检查",i_req)
-			for i, _ := range wsRsps {
+			for i := range wsRsps {
 				info, _ := wsRsps[i].Info.(RspData)
 				//fmt.Println("<<",info)
 				if info.Event == req.Op && info.Arg["channel"] == i_req["channel"] && info.Arg["instType"] == i_req["instType"] {
@@ -63,7 +63,7 @@ func checkResult(wsReq WSReqData, wsRsps []*Msg) (res bool, err error) {
 			}
 		}
 	} else {
-		for i, _ := range wsRsps {
+		for i := range wsRsps {
 			info, _ := wsRsps[i].Info.(JRPCRsp)
 			if info.Code != "0" {
 				return

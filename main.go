@@ -6,8 +6,8 @@ import (
 	"log"
 	"time"
 
-	. "github.com/du5/v5sdk_go/rest"
-	. "github.com/du5/v5sdk_go/ws"
+	. "github.com/movooc/v5sdk_go/rest"
+	. "github.com/movooc/v5sdk_go/ws"
 )
 
 /*

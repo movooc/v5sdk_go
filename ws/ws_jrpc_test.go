@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	. "github.com/du5/v5sdk_go/ws/wImpl"
+	. "github.com/movooc/v5sdk_go/ws/wImpl"
 )
 
 func PrintDetail(d *ProcessDetail) {
