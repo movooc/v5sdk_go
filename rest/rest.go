@@ -17,9 +17,10 @@ import (
 type RESTAPI struct {
 	EndPoint string `json:"endPoint"`
 	// GET/POST
-	Method     string                 `json:"method"`
-	Uri        string                 `json:"uri"`
-	Param      map[string]interface{} `json:"param"`
+	Method     string                   `json:"method"`
+	Uri        string                   `json:"uri"`
+	Param      map[string]interface{}   `json:"param"`
+	Param2     []map[string]interface{} `json:"param2"`
 	Timeout    time.Duration
 	ApiKeyInfo *APIKeyInfo
 	isSimulate bool
@@ -148,6 +149,21 @@ func (this *RESTAPI) Post(ctx context.Context, uri string, param *map[string]int
 	return this.Run(ctx)
 }
 
+// POST2请求
+func (this *RESTAPI) Post2(ctx context.Context, uri string, param *[]map[string]interface{}) (res *RESTAPIResult, err error) {
+	this.Method = POST
+	this.Uri = uri
+
+	reqParam := make([]map[string]interface{}, 0)
+
+	if param != nil {
+		reqParam = *param
+	}
+	this.Param2 = reqParam
+
+	return this.Run(ctx)
+}
+
 func (this *RESTAPI) Run(ctx context.Context) (res *RESTAPIResult, err error) {
 
 	if this.ApiKeyInfo == nil {
@@ -252,7 +268,12 @@ func (this *RESTAPI) GenReqInfo() (uri string, body string, err error) {
 	case POST:
 
 		var rawBody []byte
-		rawBody, err = json.Marshal(this.Param)
+		if len(this.Param) == 0 {
+			rawBody, err = json.Marshal(this.Param2)
+		} else {
+			rawBody, err = json.Marshal(this.Param)
+		}
+
 		if err != nil {
 			return
 		}
